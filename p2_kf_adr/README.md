@@ -63,32 +63,26 @@ ros2 run p2_kf_adr kf_estimation_vel
 - Comparar el comportamiento del filtro con diferentes configuraciones de ruido.
 - Preparar el terreno para el uso de un Filtro de Kalman Extendido (EKF) en la siguiente práctica.
 
-## Qué deben completar los estudiantes
-Los archivos kalman_filter.py, motion_models.py y observation_models.py contienen TODOs que los alumnos deben implementar.
+## Resultados de los experimentos
+Los archivos kalman_filter.py, motion_models.py y observation_models.py han sido modificados para implementar filtros de kalman.
 
-Las clases principales son:
+Lamentablemente los experimentos no se han podido realizar debido a que el uso de wsl no es capaz de soportar el programa del turtlebot4, sin embargo al runear los ficheros kf_estimation y kf_estimation_vel las gráficas salen, por lo que asumo que los programas funcionan de forma correcta.
 
-- KalmanFilter – Para el modelo simple (posición).
-- KalmanFilter_2 – Para el modelo completo (posición + velocidad).
+Sin embargo el programa está creado para facilitar la posible implementación de los experimentos, teniendo el ruido incorporado valores bajos por defecto. 
+Si se quiere introducir valores de ruido altos solo en la medida se deberá multiplicar x10 los valores de ruido de la variable **obs_noise_std**, disponibles en el archivo **kalman_filter.py**, de la carpeta **filters**, tanto en la class **KalmanFilter** como en la **KalmanFilter_2**, mientras que para generar valores de ruido altos solo en la predicción habría que multiplicar x10 los valores de ruido de la variable **proc_noise_std**, los cuales están en el mismo archivo y las mismas clases que la variable anterior.
 
-## Entrega
-Los estudiantes deberán subir a GitHub o entregar un archivo .zip con nombre: p2_kf_<iniciales> (por ejemplo: p2_kf_mgc).
+## Estructura de los filtros
 
-El repositorio o archivo.zip debe contener:
+Los filtros se estructuran en tres partes fundamentales.
 
-1. Código completo con los TODOs resueltos.
+- Init
 
-2. Capturas o gráficas de los resultados de estimación para ambos modelos.
+En esta parte se introduce todo lo necesario para que funcione el filtro de kalman, iniciando las variables e introduciendo los modelos matemáticos utilizados en el resto del programa.
 
-3. Experimentos con tres configuraciones distintas:
-    - Ruido bajo.
-    - Ruido alto en la medida.
-    - Ruido alto en el proceso.
+- Predict
 
-4. Un README o una pequeña memoria en PDF explicando:
-    - Cómo se ha implementado cada parte.
-    - Resultados observados en los tres casos.
-    - Breve análisis de por qué ocurre lo observado.
+ Esta parte se encarga de generar una predicción del estado del robot antes de recibir una medición de los sensores, esto sucede cuando una acción como el movimiento del robot se realiza.
 
-## Comentarios adicionales
-Podéis cambiarle el nombre al paquete y ponerle el mismo que a la entrega, pero sed consistentes a la hora de configurar el paquete y que esté ese nombre en todos lados para que compile bien (tanto en el nombre de la carpeta donde estarán los scripts como en el setup.cfg, como en el setup.py y como en el package.xml).
+- Update
+
+En esta parte se realiza una actualización del estado cuando se recibe una medida externa (generalmente de un sensor), esto permite que el propio filtro se corrija a sí mismo, mezclando los datos del Predict y el Update para llegar al resultado final.
