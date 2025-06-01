@@ -75,14 +75,14 @@ Si se quiere introducir valores de ruido altos solo en la medida se deberá mult
 
 Los filtros se estructuran en tres partes fundamentales.
 
-- Init
+- **Init (Inicialización)**
 
 En esta parte se introduce todo lo necesario para que funcione el filtro de kalman, iniciando las variables e introduciendo los modelos matemáticos utilizados en el resto del programa.
 
-- Predict
+- **Predict (Predicción)**
 
  Esta parte se encarga de generar una predicción del estado del robot antes de recibir una medición de los sensores, esto sucede cuando una acción como el movimiento del robot se realiza.
 
-- Update
+- **Update (Actualización)**
 
 En esta parte se realiza una actualización del estado cuando se recibe una medida externa (generalmente de un sensor), esto permite que el propio filtro se corrija a sí mismo, mezclando los datos del Predict y el Update para llegar al resultado final.
