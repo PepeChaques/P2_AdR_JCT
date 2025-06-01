@@ -71,6 +71,8 @@ Lamentablemente los experimentos no se han podido realizar debido a que el uso d
 Sin embargo el programa está creado para facilitar la posible implementación de los experimentos, teniendo el ruido incorporado valores bajos por defecto. 
 Si se quiere introducir valores de ruido altos solo en la medida se deberá multiplicar x10 los valores de ruido de la variable **obs_noise_std**, disponibles en el archivo **kalman_filter.py**, de la carpeta **filters**, tanto en la class **KalmanFilter** como en la **KalmanFilter_2**, mientras que para generar valores de ruido altos solo en la predicción habría que multiplicar x10 los valores de ruido de la variable **proc_noise_std**, los cuales están en el mismo archivo y las mismas clases que la variable anterior.
 
+Pese a no poder comprobar los resultados, basado en los conocimientos teóricos sobre los filtrps el aumento de ruido en la medición debería de dar peores resultados que el aumento de ruido en el proceso, ya que los modelos de movimiento tienden a acumular error con el tiempo, al no poder corregirse con las mediciones de los sensores el error no dejará de crecer.
+
 ## Estructura de los filtros
 
 Los filtros se estructuran en tres partes fundamentales.
